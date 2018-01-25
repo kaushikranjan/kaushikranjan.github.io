@@ -11,9 +11,9 @@ export default class Board extends React.Component {
         computerImagePath: "",
         winner: "",
         images : [
-          "./img/rockpaperscissors/rock.jpg", //1
-          "./img/rockpaperscissors/paper.jpg", //2
-          "./img/rockpaperscissors/scissor.jpg" //3
+          "./img/rockpaperscissors/rock.jpg",
+          "./img/rockpaperscissors/paper.jpg",
+          "./img/rockpaperscissors/ssc.jpg"
         ]
       };
   }
