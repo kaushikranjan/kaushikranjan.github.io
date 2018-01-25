@@ -9,12 +9,13 @@ export default class Board extends React.Component {
         pauseGame: false,
         userImagePath: "",
         computerImagePath: "",
-        winner: "",
         images : [
           "./img/rockpaperscissors/rock.jpg",
           "./img/rockpaperscissors/paper.jpg",
           "./img/rockpaperscissors/ssc.jpg"
-        ]
+        ],
+        winner: "",
+
       };
   }
 
