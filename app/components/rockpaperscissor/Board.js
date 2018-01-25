@@ -13,7 +13,7 @@ export default class Board extends React.Component {
         images : [
           "./img/rockpaperscissors/rock.jpg", //1
           "./img/rockpaperscissors/paper.jpg", //2
-          "./img/rockpaperscissors/scissors.jpg" //3
+          "./img/rockpaperscissors/scissor.jpg" //3
         ]
       };
   }
