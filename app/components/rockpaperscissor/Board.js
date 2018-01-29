@@ -1,6 +1,7 @@
 import React from "react"
 import {Bootstrap, Grid, Row, Col, Panel, Table, ButtonToolbar, Button, Image} from 'react-bootstrap';
 import BoardResult from "./BoardResult"
+
 export default class Board extends React.Component {
 
   constructor() {
@@ -9,13 +10,12 @@ export default class Board extends React.Component {
         pauseGame: false,
         userImagePath: "",
         computerImagePath: "",
-        images : [
-          "./img/rockpaperscissors/rock.jpg",
-          "./img/rockpaperscissors/paper.jpg",
-          "./img/rockpaperscissors/ssc.jpg"
-        ],
         winner: "",
-
+        images : [
+          "./img/rockpaperscissors/rock.jpg", //1
+          "./img/rockpaperscissors/paper.jpg", //2
+          "./img/rockpaperscissors/scissors.jpg" //3
+        ]
       };
   }
 
@@ -110,25 +110,27 @@ export default class Board extends React.Component {
                         <td>
                           <Row className="show-grid" style={{'display': 'table'}}>
                             <Col md={4} xsOffset={1} style={{'float': 'none', 'display': 'table-cell', 'verticalAlign' : 'top'}}>
+                              <ButtonToolbar style={{'padding-bottom': '10px'}}>
+                                  <Button style={{'width': '100%'}}
+                                          bsSize="small" bsStyle="success"
+                                          onClick={this.handleOnClick.bind(this, 0)}
+                                          >Rock</Button>
+                                </ButtonToolbar>
+                               <ButtonToolbar style={{'padding-bottom': '10px'}}>
+                                  <Button style={{'width': '100%'}}
+                                          bsSize="small" bsStyle="info"
+                                          onClick={this.handleOnClick.bind(this, 1)}
+                                          >Paper</Button>
+                                </ButtonToolbar>
+                                <ButtonToolbar style={{'padding-bottom': '10px'}}>
+                                  <Button style={{'width': '100%'}}
+                                          bsSize="small" bsStyle="warning"
+                                          onClick={this.handleOnClick.bind(this, 2)}
+                                          >Scissors</Button>
+                                </ButtonToolbar>
                               <div style={{'float': 'none', 'display': 'table-cell','verticalAlign': 'bottom'}}>
-                              <ButtonToolbar style={{'padding-bottom': '10px'}}>
-                                <Button style={{'width': '100%'}}
-                                        bsSize="small" bsStyle="success"
-                                        onClick={this.handleOnClick.bind(this, 0)}
-                                        >Rock</Button>
-                              </ButtonToolbar>
-                              <ButtonToolbar style={{'padding-bottom': '10px'}}>
-                                <Button style={{'width': '100%'}}
-                                        bsSize="small" bsStyle="info"
-                                        onClick={this.handleOnClick.bind(this, 1)}
-                                        >Paper</Button>
-                              </ButtonToolbar>
-                              <ButtonToolbar style={{'padding-bottom': '10px'}}>
-                                <Button style={{'width': '100%'}}
-                                        bsSize="small" bsStyle="warning"
-                                        onClick={this.handleOnClick.bind(this, 2)}
-                                        >Scissors</Button>
-                              </ButtonToolbar>
+
+
                               </div>
                             </Col>
                             <Col md={6}>

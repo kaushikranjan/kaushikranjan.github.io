@@ -18,8 +18,6 @@ export default class Score extends React.Component {
   }
 
   render() {
-    console.log(this.props.userScore);
-    console.log(this.props.computerScore);
     return (
       <div>
 

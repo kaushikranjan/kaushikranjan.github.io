@@ -1,6 +1,7 @@
 import React from "react"
 
 import Square from  "./Square";
+import FlexView from 'react-flexview';
 import {Grid, Row, Col, Table, Modal, Button} from 'react-bootstrap';
 
 export default class Board extends React.Component {
@@ -10,8 +11,17 @@ export default class Board extends React.Component {
     this.state = {
       squares: Array(9).fill('-'),
       currentPlayer: 'X',
-      isGameOver: false
+      isGameOver: false,
+      allMovesComplete: false
     };
+  }
+
+  areAllMovesComplete(squares) {
+    for (let i = 0; i < 9; i++) {
+      if (squares[i] === '-')
+        return false;
+    }
+    return true;
   }
 
   isCurrentPlayerWinner(squares) {
@@ -45,9 +55,19 @@ export default class Board extends React.Component {
     this.setState({
       squares: Array(9).fill('-'),
       currentPlayer: 'X',
-      isGameOver: false
+      isGameOver: false,
+      allMovesComplete: false
     });
   }
+
+  modalMessage() {
+      if (this.state.isGameOver)
+        return <b>Congrats!! {this.state.winner} is the winner. </b>
+      else if (this.state.allMovesComplete)
+        return <b>Its a tie!!</b>
+      else return <b></b>
+  }
+
 
   handleClick(i) {
       if (!this.state.isGameOver) {
@@ -56,7 +76,8 @@ export default class Board extends React.Component {
         var newPlayer = this.togglePlayer(this.state.currentPlayer)
         var result = this.isCurrentPlayerWinner(squares)
         var winner = this.state.currentPlayer;
-        this.setState({squares: squares, currentPlayer: newPlayer, isGameOver: result, winner: winner});
+        var allMovesComplete = this.areAllMovesComplete(squares);
+        this.setState({squares: squares, currentPlayer: newPlayer, isGameOver: result, winner: winner, allMovesComplete: allMovesComplete});
       }
   }
 
@@ -80,25 +101,24 @@ export default class Board extends React.Component {
         <Grid>
           <Row className="show-grid">
             <Col xs={6} md={4}>
-              <Table condensed bordered>
-              <tbody>
-                <tr>
-                  <td style={{'width':'10%'}}>{this.renderSquare(0)}</td>
-                  <td style={{'width':'10%'}}>{this.renderSquare(1)}</td>
-                  <td style={{'width':'10%'}}>{this.renderSquare(2)}</td>
-                </tr>
-                <tr>
-                  <td style={{'width':'10%'}}>{this.renderSquare(3)}</td>
-                  <td style={{'width':'10%'}}>{this.renderSquare(4)}</td>
-                  <td style={{'width':'10%'}}>{this.renderSquare(5)}</td>
-                </tr>
-                <tr>
-                  <td style={{'width':'10%'}}>{this.renderSquare(6)}</td>
-                  <td style={{'width':'10%'}}>{this.renderSquare(7)}</td>
-                  <td style={{'width':'10%'}}>{this.renderSquare(8)}</td>
-                </tr>
-              </tbody>
-            </Table>
+            <FlexView column height='30%' width='50%'>
+              <FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(0)} </FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(1)} </FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(2)} </FlexView>
+              </FlexView>
+              <FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(3)} </FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(4)} </FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(5)} </FlexView>
+              </FlexView>
+              <FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(6)} </FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(7)} </FlexView>
+                  <FlexView basis={50} style={{ height: 50 }} hAlignContent='center' vAlignContent='center'> {this.renderSquare(8)} </FlexView>
+              </FlexView>
+            </FlexView>
+
           </Col>
           <Col xs={4} md={3} >
               <div  style={{'display': 'table-cell', 'verticalAlign': 'middle'}}>
@@ -111,10 +131,10 @@ export default class Board extends React.Component {
       </Grid>
 
             <div className="static-modal">
-          		<Modal show={this.state.isGameOver} onHide={this.handleClose}>
+          		<Modal show={this.state.isGameOver || this.state.allMovesComplete} onHide={this.handleClose}>
 
           			<Modal.Body>
-                  <p style={{'color' : ' #2738a0  ', 'fontSize':'200%', 'verticalAlign': 'middle'}}><b>Congrats!! {this.state.winner} is the winner.</b></p>
+                  <p style={{'color' : ' #2738a0  ', 'fontSize':'200%', 'verticalAlign': 'middle'}}>{this.modalMessage()}</p>
                 </Modal.Body>
 
           			<Modal.Footer>

@@ -36,11 +36,6 @@ export default class BoardResult extends React.Component {
 
 
   render() {
-    console.log(this.props.status);
-    console.log(this.displayValue());
-    console.log(this.displayColor());
-    console.log(this.displayContent());
-
     return (
       <div>
           <Row className="show-grid">
