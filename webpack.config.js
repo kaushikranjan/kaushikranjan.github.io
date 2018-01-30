@@ -7,6 +7,9 @@ module.exports = {
   context: __dirname,
   devtool: 'source-map', //debug? "inline-sourcemap" : null,
   entry: './app',
+  devServer: {
+    historyApiFallback: true
+  },
   module: {
     loaders: [
       {
